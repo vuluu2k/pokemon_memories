@@ -18,6 +18,7 @@ export default {
         startedAt: 0
       },
       statusMatch: 'default',
+      timer: 0
     }
   },
   methods: {
@@ -30,8 +31,13 @@ export default {
       this.settings.cardsContext = shuffled(cards)
       this.settings.startedAt = new Date().getTime()
 
-      console.log(cards)
-
+      this.statusMatch = 'match'
+    },
+    onGetResult() {
+      this.timer = new Date().getTime() - this.settings.startedAt
+      this.statusMatch = 'result'
+    },
+    startAgain() {
       this.statusMatch = 'match'
     }
   }
@@ -40,8 +46,12 @@ export default {
 
 <template>
   <MainScreen v-if="statusMatch === 'default'" @onStart="onHandleBeforeStart($event)" />
-  <InteractScreen v-if="statusMatch === 'match'" :cardsContext="settings.cardsContext" />
-  <ResultScreen />
+  <InteractScreen
+    v-if="statusMatch === 'match'"
+    :cardsContext="settings.cardsContext"
+    @onFinished="onGetResult"
+  />
+  <ResultScreen v-if="statusMatch === 'result'" :timer="timer" @startAgain="startAgain" />
 </template>
 
 <style scoped></style>

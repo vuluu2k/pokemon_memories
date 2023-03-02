@@ -1,39 +1,58 @@
 <script lang="ts">
+import type { PropType } from 'vue'
+
 export default {
   props: {
-    card: { type: Number }
+    card: { type: [String, Number, Object] as PropType<{ index: Number; value: Number }> }
   },
   name: 'CardFlip',
   data() {
     return {
-      isFlipped: false,
+      isDisabled: false as Boolean,
+      isFlipped: false
     }
   },
-  setup(){
-    const getImageUrl = (name: number | undefined) => {
-      return new URL(`../assets/${name}.png`, import.meta.url).href
-    }
-
-    return {
-      getImageUrl
+  computed: {
+    image() {
+      return `src/assets/images/${this.card?.value}.png`
     }
   },
   methods: {
     onToggleFlipCard() {
+      if (this.isDisabled) return false
+
       this.isFlipped = !this.isFlipped
+
+      if (this.isFlipped) this.$emit('onFlip', this.card)
+    },
+    onFlipBackCard() {
+      this.isFlipped = false
+    },
+    onDisabledCard() {
+      this.isDisabled = true
     }
   }
 }
 </script>
 
 <template>
-  <div class="card" @click="onToggleFlipCard">
+  <div class="card" :class="{ disabled: isDisabled }" @click="onToggleFlipCard">
     <div class="card__inner" :class="{ 'is-flipped': isFlipped }">
       <div class="card__face card__face--front">
         <div class="card__content"></div>
       </div>
       <div class="card__face card__face--back">
-        <div class="card__content" :style="{ backgroundImage: `url(${getImageUrl(card)}` }"></div>
+        <div
+          class="card__content"
+          :style="{
+            'background-image': 'url(' + image + ')',
+            width: '100%',
+            height: '100%',
+            'background-size': 'contain',
+            'background-repeat': 'no-repeat',
+            'background-position': 'center center'
+          }"
+        ></div>
       </div>
     </div>
   </div>
@@ -70,6 +89,10 @@ export default {
   border-radius: 1rem;
   padding: 1rem;
   box-shadow: 0 3px 10px 3px rgba(0, 0, 0, 0.2);
+}
+
+.card.disabled {
+  cursor: default;
 }
 
 .card__face--front .card__content {
