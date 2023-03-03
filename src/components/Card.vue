@@ -4,7 +4,8 @@ import type { PropType } from 'vue'
 export default {
   props: {
     card: { type: [String, Number, Object] as PropType<{ index: Number; value: Number }> },
-    count: { type: Number, default: 0 }
+    count: { type: Number, default: 0 },
+    isCheckEnabled: Boolean
   },
   name: 'CardFlip',
   data: () => {
@@ -25,7 +26,9 @@ export default {
   },
   methods: {
     onToggleFlipCard() {
-      if (this.isDisabled) return false
+      console.log(this.isCheckEnabled);
+
+      if (this.isDisabled || this.isCheckEnabled) return false
 
       this.isFlipped = !this.isFlipped
 

@@ -32,7 +32,7 @@ export default {
       if (this.rules.length === 2) return false
 
       this.rules.push(card)
-
+      
       if (this.rules.length === 2 && this.rules[0].value === this.rules[1].value) {
         // @ts-ignore
         this.$refs[`card-${this.rules[0].index}`][0].onDisabledCard()
@@ -54,7 +54,7 @@ export default {
           this.$refs[`card-${this.rules[1].index}`][0].onFlipBackCard()
 
           this.rules = []
-        }, 1000)
+        }, 720)
       } else return false
     }
   }
@@ -71,6 +71,7 @@ export default {
         :card="{ index: index, value: card }"
         @onFlip="checkRule"
         :count="cardsContext.length"
+        :isCheckEnabled="rules.length === 2"
       />
     </div>
   </div>
