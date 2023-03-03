@@ -21,12 +21,8 @@ export default {
       return imageUrl
     }
   },
-  mounted() {
-    console.log(Math.sqrt(this.count))
-  },
   methods: {
     onToggleFlipCard() {
-      console.log(this.isCheckEnabled);
 
       if (this.isDisabled || this.isCheckEnabled) return false
 
