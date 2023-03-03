@@ -47,13 +47,13 @@ export default {
 </script>
 
 <template>
-  <!-- <main-screen v-if="statusMatch === 'default'" @onStart="onHandleBeforeStart($event)" />
+  <main-screen v-if="statusMatch === 'default'" @onStart="onHandleBeforeStart($event)" />
   <interact-screen
     v-if="statusMatch === 'match'"
     :cardsContext="settings.cardsContext"
     @onFinished="onGetResult"
-  /> -->
-  <result-screen v-if="statusMatch === 'default'" :timer="timer" @startAgain="startAgain" />
+  />
+  <result-screen v-if="statusMatch === 'result'" :timer="timer" @startAgain="startAgain" />
   <copy-right/>
 </template>
 
