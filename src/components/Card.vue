@@ -7,7 +7,7 @@ export default {
     count: { type: Number, default: 0 }
   },
   name: 'CardFlip',
-  data() {
+  data: () => {
     return {
       isDisabled: false as Boolean,
       isFlipped: false
@@ -15,12 +15,13 @@ export default {
   },
   computed: {
     image() {
-      return `src/assets/images/${this.card?.value}.png`
+      const imageUrl = new URL(`../assets/images/${this.card?.value}.png`, import.meta.url).href
+
+      return imageUrl
     }
   },
-  mounted(){
-    console.log(Math.sqrt(this.count));
-    
+  mounted() {
+    console.log(Math.sqrt(this.count))
   },
   methods: {
     onToggleFlipCard() {

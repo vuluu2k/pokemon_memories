@@ -81,9 +81,10 @@ export default {
   width: 150px;
   height: 150px;
   background-color: var(--dark);
-  color:var(--light);
+  color: var(--light);
   outline: none;
-  border:none;
+  border: 1px solid var(--light);
+  border-radius: 8px;
   box-shadow: 0 3px 10px 3px rgba(0, 0, 0, 0.2);
 }
 
