@@ -2,13 +2,15 @@
 import MainScreen from './screens/MainScreen.vue'
 import InteractScreen from './screens/InteractScreen.vue'
 import ResultScreen from './screens/ResultScreen.vue'
+import CopyRight from './components/CopyRight.vue'
 import { shuffled } from './utils/array'
 export default {
   name: 'App',
   components: {
     MainScreen,
     InteractScreen,
-    ResultScreen
+    ResultScreen,
+    CopyRight
   },
   data() {
     return {
@@ -45,13 +47,14 @@ export default {
 </script>
 
 <template>
-  <MainScreen v-if="statusMatch === 'default'" @onStart="onHandleBeforeStart($event)" />
-  <InteractScreen
+  <!-- <main-screen v-if="statusMatch === 'default'" @onStart="onHandleBeforeStart($event)" />
+  <interact-screen
     v-if="statusMatch === 'match'"
     :cardsContext="settings.cardsContext"
     @onFinished="onGetResult"
-  />
-  <ResultScreen v-if="statusMatch === 'result'" :timer="timer" @startAgain="startAgain" />
+  /> -->
+  <result-screen v-if="statusMatch === 'default'" :timer="timer" @startAgain="startAgain" />
+  <copy-right/>
 </template>
 
 <style scoped></style>

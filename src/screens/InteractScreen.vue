@@ -10,6 +10,18 @@ export default {
   components: {
     CardFlip
   },
+  computed: {
+    style() {
+      let style = {
+        width: '0px',
+        height: '90vh'
+      }
+
+      style.width = `calc((((90vh - 64px) / ${Math.sqrt(this.cardsContext.length)} - 16px) * 3/4 + 16px) * ${Math.sqrt(this.cardsContext.length)} )`
+
+      return style
+    }
+  },
   data: () => {
     return {
       rules: [] as Array<{ index: Number; value: Number }>
@@ -50,15 +62,36 @@ export default {
 </script>
 
 <template>
-  <div>
-    <CardFlip
-      v-for="(card, index) in cardsContext"
-      :key="index"
-      :ref="`card-${index}`"
-      :card="{ index: index, value: card }"
-      @onFlip="checkRule"
-    />
+  <div class="screen">
+    <div class="screen__inner" :style="style">
+      <card-flip
+        v-for="(card, index) in cardsContext"
+        :key="index"
+        :ref="`card-${index}`"
+        :card="{ index: index, value: card }"
+        @onFlip="checkRule"
+        :count="cardsContext.length"
+      />
+    </div>
   </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="css" scoped>
+.screen {
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  background-color: var(--dark);
+  color: var(--light);
+}
+
+.screen__inner {
+  width: 800px;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 2rem auto;
+}
+</style>

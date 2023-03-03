@@ -3,7 +3,8 @@ import type { PropType } from 'vue'
 
 export default {
   props: {
-    card: { type: [String, Number, Object] as PropType<{ index: Number; value: Number }> }
+    card: { type: [String, Number, Object] as PropType<{ index: Number; value: Number }> },
+    count: { type: Number, default: 0 }
   },
   name: 'CardFlip',
   data() {
@@ -16,6 +17,10 @@ export default {
     image() {
       return `src/assets/images/${this.card?.value}.png`
     }
+  },
+  mounted(){
+    console.log(Math.sqrt(this.count));
+    
   },
   methods: {
     onToggleFlipCard() {
@@ -36,7 +41,15 @@ export default {
 </script>
 
 <template>
-  <div class="card" :class="{ disabled: isDisabled }" @click="onToggleFlipCard">
+  <div
+    class="card"
+    :class="{ disabled: isDisabled }"
+    @click="onToggleFlipCard"
+    :style="{
+      height: `calc((90vh - 64px) / ${Math.sqrt(count)} - 16px)`,
+      width: `calc(((90vh - 64px) / ${Math.sqrt(count)} - 16px) * 3/4 )`
+    }"
+  >
     <div class="card__inner" :class="{ 'is-flipped': isFlipped }">
       <div class="card__face card__face--front">
         <div class="card__content"></div>
