@@ -33,7 +33,7 @@ export default {
 
       this.rules.push(card)
 
-      if (this.rules.length === 2 && this.rules[0] === this.rules[1]) {
+      if (this.rules.length === 2 && this.rules[0].value === this.rules[1].value) {
         // @ts-ignore
         this.$refs[`card-${this.rules[0].index}`][0].onDisabledCard()
         // @ts-ignore
@@ -46,7 +46,7 @@ export default {
         if (elementDisabled && elementDisabled.length === this.cardsContext.length - 2) {
           setTimeout(() => this.$emit('onFinished'), 800)
         }
-      } else if (this.rules.length === 2 && this.rules[0] !== this.rules[1]) {
+      } else if (this.rules.length === 2 && this.rules[0].value !== this.rules[1].value) {
         setTimeout(() => {
           // @ts-ignore
           this.$refs[`card-${this.rules[0].index}`][0].onFlipBackCard()
