@@ -2,7 +2,7 @@
 
 ## Website project
 <img src="https://vuluu2k.github.io/pokemon_memories/assets/2-72e8269e.png" alt="pokemon"/>
-you are visiting [pokemon memories](https://vuluu2k.github.io/pokemon_memories/) now!
+you are visiting [Pokemon Memories](https://vuluu2k.github.io/pokemon_memories) now!
 
 ## Development
 
